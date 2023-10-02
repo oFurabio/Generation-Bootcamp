@@ -2,6 +2,7 @@ package biblioteca.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import biblioteca.Menu;
 import biblioteca.util.Cores;
@@ -19,10 +20,16 @@ public class BuscadorAutores implements Buscador {
                 encontrados.add(Cores.TEXT_YELLOW_BOLD_BRIGHT+Menu.listaDeLivros.get(i).getAutor()+ ": " +Cores.TEXT_RESET+Menu.listaDeLivros.get(i).getNome());
         }
 
+        long numero = encontrados.stream()
+                .filter(x-> x.toString().endsWith("o")).count();
+
+        System.out.println("Autores cujo nome terminam com a letra O: " + numero);
+
         Mostrar(busca);
     }
 
     public void Mostrar(String busca) {
+
         if(!encontrados.isEmpty()) {
             System.out.println("\nAutores contendo: \"" +busca+"\"\n");
 
